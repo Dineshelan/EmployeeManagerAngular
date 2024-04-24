@@ -10,9 +10,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public employees: Employee[];
-  public editEmployee: Employee;
-  public deleteEmployee: Employee;
+  employees: Employee[];
+  editEmployee: Employee;
+  deleteEmployee: Employee;
 
   constructor(private employeeService: EmployeeService){}
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     this.getEmployees();
   }
 
-  public getEmployees(): void {
+  getEmployees() {
     this.employeeService.getEmployee().subscribe(
       (response: Employee[]) => {
         this.employees = response;
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onAddEmloyee(addForm: NgForm): void {
+  onAddEmloyee(addForm: NgForm) {
     document.getElementById('add-employee-form').click();
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onUpdateEmloyee(employee: Employee): void {
+  onUpdateEmloyee(employee: Employee) {
     this.employeeService.updateEmployee(employee).subscribe(
       (response: Employee) => {
         console.log(response);
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onDeleteEmloyee(employeeId: number): void {
+  onDeleteEmloyee(employeeId: number) {
     this.employeeService.deleteEmployee(employeeId).subscribe(
       (response: void) => {
         console.log(response);
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public searchEmployees(key: string): void {
+  searchEmployees(key: string) {
     console.log(key);
     const results: Employee[] = [];
     for (const employee of this.employees) {
@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public onOpenModal(employee: Employee, mode: string): void {
+  onOpenModal(employee: Employee, mode: string) {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
